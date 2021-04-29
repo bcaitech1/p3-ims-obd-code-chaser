@@ -14,6 +14,7 @@ from dataset import get_data_loader
 from train import train, seed_every
 from inference import inference
 from config import Config
+from loss import FocalLoss
 
 
 def main(c: Config) -> None:
@@ -23,16 +24,16 @@ def main(c: Config) -> None:
         c.device
     )
 
-    criterion = nn.CrossEntropyLoss()
-    # optimizer = MADGRAD(
-    #     params=model.parameters(), lr=c.LEARNING_RATE, weight_decay=c.WEIGHT_DECAY
-    # )
-    optimizer = torch.optim.Adam(
-        model.parameters(), lr=c.LEARNING_RATE, weight_decay=c.WEIGHT_DECAY
+    # criterion = nn.CrossEntropyLoss()
+    criterion = FocalLoss(gamma=0.5)
+    optimizer = MADGRAD(
+        params=model.parameters(), lr=c.LEARNING_RATE, weight_decay=c.WEIGHT_DECAY
     )
 
     train_transform = A.Compose([ToTensorV2()])
     val_transform = A.Compose([ToTensorV2()])
+    # train_transform = A.Compose([ToTensorV2(), A.Resize(256, 256)])
+    # val_transform = A.Compose([ToTensorV2(), A.Resize(256, 256)])
     train_loader = get_data_loader(
         "train",
         batch_size=c.BATCH_SIZE,
@@ -50,7 +51,6 @@ def main(c: Config) -> None:
         dataset_path=c.DATASET_PATH,
         transform=val_transform,
     )
-    model.cuda()
 
     train(
         c.NUM_EPOCHS,
