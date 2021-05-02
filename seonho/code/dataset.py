@@ -125,7 +125,11 @@ def get_data_loader(
     )
 
     return DataLoader(
-        dataset=dataset, num_workers=2, batch_size=batch_size, collate_fn=_collate_fn
+        dataset=dataset,
+        num_workers=2,
+        batch_size=batch_size,
+        collate_fn=_collate_fn,
+        drop_last=mode in ("train", "val"),
     )
 
 
