@@ -59,8 +59,7 @@ def main(c: Config) -> None:
     )
 
     train(
-        # c.NUM_EPOCHS,
-        6,
+        c.NUM_EPOCHS,
         model,
         train_loader,
         val_loader,
