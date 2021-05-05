@@ -143,3 +143,12 @@ cython_debug/
 
 # submission
 *.csv
+
+# vscode
+.vscode
+
+# MacOS
+DS_STORE
+
+# wandb
+wandb/
