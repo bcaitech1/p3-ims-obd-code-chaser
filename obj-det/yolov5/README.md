@@ -5,13 +5,13 @@
 <br>
 
 # Results
-| Model | Evolved hyperparmeter | box mAP@50|config|
-| :---: | :---: | :---: | :---: |
-| YOLOv5x6 |  OPTION 1 | 0.4184 |[config](./config/htc_evolved.yaml)|
-| YOLOv5x6 |  OPTION 2 | 0.4310 |[config](./config/htc_mixup.yaml)|
-| YOLOv5x6 kfold |  OPTION 1 | 0.5001 |[config](./config/htc_evolved.yaml)|
-| YOLOv5x6 kfold TTA |  OPTION 1 | 0.4993 |[config](./config/htc_evolved.yaml)|
-| YOLOv5x6 kfold |  OPTION 2 | 0.5076 |[config](./config/htc_mixup.yaml)|
+| Model | Evolved hyperparmeter | box mAP@50|config|Wandb|
+| :---: | :---: | :---: | :---: | :---: |
+| YOLOv5x6 |  OPTION 1 | 0.4184 |[config](obj-det/yolov5/config/hyp_evolved.yaml)|[wabdb](https://wandb.ai/erinchoi/mixtest/reports/Training-with-hyp_evolved-yaml--Vmlldzo3MTQ0NDI?accessToken=pg598rh5dfom1feoanvlu1zpppjaimoqn1fibns5wqerhsxcqbdskxl09s43cgyn)|
+| YOLOv5x6 |  OPTION 2 | 0.4310 |[config](obj-det/yolov5/config/htc_mixup.yaml)|[wabdb](https://wandb.ai/erinchoi/Kfold/reports/Training-with-hyp_mixup-yaml--Vmlldzo3MTQ0NDY?accessToken=o4k067wo9qzb6q42vx1ta3df0ddfueqe1t3c5ui5eh09284o2dpb7bmwr07ef5ai)|
+| YOLOv5x6 kfold |  OPTION 1 | 0.5001 |[config](obj-det/yolov5/config/hyp_evolved.yaml)|NONE
+| YOLOv5x6 kfold TTA |  OPTION 1 | 0.4993 |[config](obj-det/yolov5/config/hyp_evolved.yaml)|NONE
+| YOLOv5x6 kfold |  OPTION 2 | 0.5076 |[config](obj-det/yolov5/config/htc_mixup.yaml)|NONE
 
 
 -------------
