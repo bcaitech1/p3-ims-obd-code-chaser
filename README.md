@@ -26,8 +26,8 @@
     - **neck**: BiFPN
     - **detector**: EfficientDet
   - model3:
-    - **backbone**: CSP-Darknet
-    - **neck**: PAN
+    - **backbone**: CSP-Darknet (depth multiple: 1.33, width multiple: 1.25)
+    - **neck**: PANet
     - **detector**: YOLO
   - multi head ensemble based on [WBF](https://arxiv.org/abs/1910.13302)
 
