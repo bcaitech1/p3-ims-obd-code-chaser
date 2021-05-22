@@ -16,7 +16,7 @@
 | EfficientNet b3 | noisy-student | 2 | 0.6119 |
 | EfficientNet b3 | noisy-student | 3 | 0.6221 |
 | EfficientNet b3 | noisy-student | 4 | 0.6153 |
-| EfficientNet b3 | noisy-student | 1+2+4 | 0.6511 |
+| EfficientNet b3 | noisy-student | 1+2+3 | 0.6511 |
 | EfficientNet b3 | noisy-student | 1+2+3+4 | 0.6767 |
 | EfficientNet b3 | noisy-student | 5 fold ensemble  | 0.6933 |
 
