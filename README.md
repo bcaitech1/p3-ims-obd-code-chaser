@@ -4,7 +4,7 @@
   - 소재열
   - 이대훈
   - 조호성(https://github.com/chohoseong)
-  - 최이서
+  - 최이서(https://github.com/iseochoi)
 
 # Task and solving strategies
 - data: a part of [TACO dataset](http://tacodataset.org/)
@@ -26,9 +26,9 @@
     - **neck**: BiFPN
     - **detector**: EfficientDet
   - model3:
-    - **backbone**: 
-    - **neck**: 
-    - **detector**: 
+    - **backbone**: CSP-Darnet
+    - **neck**: PAN
+    - **detector**: YOLO
   - multi head ensemble based on [WBF](https://arxiv.org/abs/1910.13302)
 
 # Result
