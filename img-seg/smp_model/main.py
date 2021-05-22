@@ -83,6 +83,7 @@ def get_config() -> Config:
     parser.add_argument("--pretrained", type=str, default="imagenet")
 
     args = parser.parse_args()
+    device = "cuda" if torch.cuda.is_available() else "cpu"
 
     return Config(
         DATASET_PATH = args.data,
@@ -98,7 +99,7 @@ def get_config() -> Config:
         WEIGHT_DECAY = args.wd,
         NUM_EPOCHS = args.epochs,
         SEED = args.seed,
-        device = "cuda" if torch.cuda.is_available() else "cpu",
+        device = device,
         MODEL = args.model,
         ENCODER = args.encoder,
         PRETRAINED = args.pretrained,
