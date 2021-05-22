@@ -34,7 +34,6 @@ def get_lr(optimizer):
 
 def increment_path(path, exist_ok=False):
     """ Automatically increment path, i.e. runs/exp --> runs/exp0, runs/exp1 etc.
-
     Args:
         path (str or pathlib.Path): f"{model_dir}/{args.name}".
         exist_ok (bool): whether increment path (increment if False).
@@ -56,13 +55,19 @@ def train(dataset_path, model_dir, args):
     use_cuda = torch.cuda.is_available()
     device = torch.device("cuda" if use_cuda else "cpu")
 
+    """
+    RandomResizedCrop(512, 512, (0.75, 1.0), p=0.5)
+    RandomBrightnessContrast(p=0.5)
+    ShiftScaleRotate(p=0.5)
+    HorizontalFlip(p=0.5)
+    VerticalFlip(p=0.5)
+    """
     # -- augmentation
     train_transform = A.Compose([
-        # A.ShiftScaleRotate(),
-        # A.RandomBrightnessContrast(),
-        # A.HorizontalFlip(),
-        # A.VerticalFlip(),
-        # A.RandomResizedCrop(512, 512, (0.75, 1.0), p=0.5),
+        A.RandomResizedCrop(512, 512, (0.75, 1.0), p=0.5),
+        A.RandomBrightnessContrast(p=0.5),
+        A.ShiftScaleRotate(p=0.5),
+        A.HorizontalFlip(p=0.5),
         ToTensorV2()
     ])
     
@@ -70,8 +75,8 @@ def train(dataset_path, model_dir, args):
         ToTensorV2()
     ])
    
-    train_path = dataset_path + '/train.json'
-    val_path = dataset_path + '/val.json'
+    train_path = os.path.join(dataset_path, 'train_data.json')
+    val_path = os.path.join(dataset_path, 'valid_data.json')
 
     # -- data_loader
     train_set = CustomDataLoader(data_dir=train_path, mode='train', transform=train_transform)
@@ -104,8 +109,8 @@ def train(dataset_path, model_dir, args):
     criterion = SoftCrossEntropyLoss(smooth_factor= 0.1)
     criterion2 = nn.BCELoss()
 
-    optimizer = AdamP(model.parameters(), lr=args.lr)
-    scheduler = CosineAnnealingLR(optimizer, T_max=10, eta_min=0)
+    optimizer = AdamP(model.parameters(), lr=args.lr, weight_decay=1e-3)
+    scheduler = CosineAnnealingLR(optimizer, T_max=10, eta_min=1e-4)
 
     # -- logging
     logger = SummaryWriter(log_dir=save_dir)
@@ -122,7 +127,7 @@ def train(dataset_path, model_dir, args):
 
         for idx, (images, masks, label) in enumerate(train_loader):
             images = torch.stack(images)       # (batch, channel, height, width)
-            masks = torch.stack(masks).long()  # (batch, channel, height, width)
+            masks = torch.stack(masks).long()  # (batch, height, width)
             label = torch.stack(label)
 
             # gpu 연산을 위해 device 할당
@@ -227,11 +232,11 @@ if __name__ == '__main__':
     parser.add_argument('--epochs', type=int, default=1, help='number of epochs to train (default: 1)')
     parser.add_argument('--batch_size', type=int, default=16, help='input batch size for training (default: 16)')
     parser.add_argument('--lr', type=float, default=3e-4, help='learning rate (default: 3e-4)')
-    parser.add_argument('--name', default='exp', help='model save at {SM_MODEL_DIR}/{name}')
+    parser.add_argument('--name', default='unet3plus_exp', help='model save at {SM_MODEL_DIR}/{name}')
 
     # Container environment
     parser.add_argument('--data_dir', type=str, default=os.environ.get('SM_CHANNEL_TRAIN', '/opt/ml/input/data'))
-    parser.add_argument('--model_dir', type=str, default=os.environ.get('SM_MODEL_DIR', './model'))
+    parser.add_argument('--model_dir', type=str, default=os.environ.get('SM_MODsEL_DIR', './model'))
 
     args = parser.parse_args()
     print(args)
