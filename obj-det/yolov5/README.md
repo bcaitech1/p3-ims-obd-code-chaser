@@ -100,4 +100,4 @@
    ```
 
 ## WBF ensemble
-- Check the [Notebook](p3-ims-obd-code-chaser/obj-det/yolov5/det_utils.ipynb)
+- Check the [Notebook](./wbf_ensemble.ipynb)
