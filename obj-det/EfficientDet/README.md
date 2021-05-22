@@ -37,17 +37,14 @@
 - Train
 
   ```shell
-   $ python train.py
+   $ python train.py \
+            --epochs {epochs} \
+            --train_batch_size {batch_size} \
+            --valid_batch_size {batch_size} \
+            --model {model} \
+            --optimizer {optimizer} \
+            --lr {lr}
   ```
-
-  다음과 같은 Arguments를 제공한다.
-
-  - epochs
-  - train_batch_size
-  - valid_batch_size
-  - model
-  - optimizer
-  - lr
 
   <br>
 
@@ -55,10 +52,7 @@
 
   ```shell
    $ python inference.py
+            --batch_size {batch_size} \
+            --threshold {threshold} \
+            --check_dir {save folder name}
   ```
-
-  다음과 같은 Arguments를 제공한다.
-
-  - batch_size
-  - threshold
-  - check_dir
